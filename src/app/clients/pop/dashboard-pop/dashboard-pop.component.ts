@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import {MusicInstrument} from "../../../app.const";
 
 @Component({
   selector: 'app-dashboard-pop',
   templateUrl: './dashboard-pop.component.html',
   styleUrls: ['./dashboard-pop.component.scss']
 })
-export class DashboardPopComponent implements OnInit {
+export class DashboardPopComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(
+    @Inject(MusicInstrument) public readonly musicInstrument: string
+  ) { }
 
 }

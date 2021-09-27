@@ -1,0 +1,5 @@
+<h1>Custom Client {{ activeClient$ | async }}</h1>
+<button (click)="onChangeClient(client.JAZZ)" type="button">Jazz</button>
+<button (click)="onChangeClient(client.POP)" type="button">Pop</button>
+
+<app-home></app-home>
