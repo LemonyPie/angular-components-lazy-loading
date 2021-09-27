@@ -1,13 +1,20 @@
-import {Directive, Injector, OnInit, ViewContainerRef} from '@angular/core';
-import {Client, ClientService} from "../services/client.service";
+import {Directive, Injector, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {ClientService} from "../services/client.service";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {ClientComponentManagerService} from "../services/client-component-manager.service";
+
+export enum ClientFeature {
+  Dashboard
+}
 
 @UntilDestroy()
 @Directive({
   selector: '[appClientHost]'
 })
 export class ClientHostDirective implements OnInit {
+
+  @Input()
+  public appClientHost!: ClientFeature
 
   constructor(
     private vcr: ViewContainerRef,
@@ -19,8 +26,15 @@ export class ClientHostDirective implements OnInit {
   public ngOnInit() {
     this.clientService.activeClient$.pipe(
       untilDestroyed(this)
-    ).subscribe((client: Client) => (
-      this.clientComponentManagerService.renderDashboardFeature(client, this.vcr)
-    ));
+    ).subscribe(() => this.renderFeature());
+  }
+
+  private renderFeature(): void {
+    if (this.appClientHost === undefined) { throw new Error(`No feature with name ${this.appClientHost} detected!`); }
+
+    switch (this.appClientHost) {
+      case ClientFeature.Dashboard:
+        this.clientComponentManagerService.renderDashboardFeature(this.vcr).subscribe();
+    }
   }
 }
