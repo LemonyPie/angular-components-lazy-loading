@@ -9,7 +9,8 @@ export enum ClientFeature {
 
 @UntilDestroy()
 @Directive({
-  selector: '[appClientHost]'
+  selector: '[appClientHost]',
+  exportAs: 'clientComponentHost'
 })
 export class ClientHostDirective implements OnInit {
 
