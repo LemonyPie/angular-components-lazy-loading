@@ -4,14 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { ClientHostDirective } from './directives/client-host.directive';
+import { DashboardDirective } from './dashboard/dashboard.directive';
 import {CommonModule} from "@angular/common";
+import {SettingsComponent} from "./settings/settings.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ClientHostDirective
+    DashboardDirective,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
